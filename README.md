@@ -1,73 +1,87 @@
-# 🚀 DevOps Central - Plateforme Multi-tenant (Projet D)
+# 🚀 DevOps Central - Plateforme Multi-tenant (3PRJ1)
 
-> **Hackathon Innovation - 3PRJ1 - École IT**  
-> *Solution développée par l'équipe "Matrix"*
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![Django](https://img.shields.io/badge/Django-5.0-green)
+![Status](https://img.shields.io/badge/Status-Hackathon-orange)
+![OS](https://img.shields.io/badge/OS-Windows%2011-blue)
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![Platform](https://img.shields.io/badge/Platform-Windows%2011-0078D6.svg)](https://www.microsoft.com/windows)
-[![Status](https://img.shields.io/badge/Status-Development-yellow.svg)]()
+**Projet de Fin d'Unité - Hackathon Innovation**  
+École IT - Bachelor 3 - Année 2025-2026
 
-## 📋 Contexte du Projet
+Ce dépôt contient le code source du **Projet D : DevOps Central**, une plateforme unifiée de gestion de projets et d'automatisation pour ESN.
 
-Ce projet a été réalisé dans le cadre du **Hackathon de fin d'unité B3** (42h). 
-Il répond à la demande de l'ESN **TechConsulting Group** visant à centraliser et standardiser la gestion des outils de développement (Git, CI/CD, Monitoring) pour ses 50 projets clients.
-
-L'objectif est de fournir une **plateforme SaaS multi-tenant** permettant de réduire les coûts de setup et d'harmoniser les pratiques DevOps.
-
-**Dépôt GitHub :** [https://github.com/ArmSal/Hackathon-Innovation---Matrix.git](https://github.com/ArmSal/Hackathon-Innovation---Matrix.git)
+🔗 **URL du Dépôt :** [https://github.com/ArmSal/Hackathon-Innovation---Matrix.git](https://github.com/ArmSal/Hackathon-Innovation---Matrix.git)
 
 ---
 
-## 👥 L'Équipe (Team Matrix)
+## 👥 L'Équipe Matrix
 
-Projet réalisé sous Windows 11 en collaboration Agile sur 3 jours.
+Projet réalisé en mode **Agile** sur une durée intensive de **3 jours**.
 
 | Membre | Rôle | Responsabilités Principales |
 | :--- | :--- | :--- |
-| **Serge Anglesy N'GUESSAN** | 🏗️ Lead Dev / Architecture | Conception globale, choix techniques, cohérence du code |
-| **Fedi KHALDI** | 🗄️ Backend / Base de données | Modélisation PostgreSQL, API, Logique métier |
-| **Babikir IBRAHIM AL KHALIL** | 🎨 Frontend / UI / UX | Dashboards, Interface utilisateur, Expérience client |
-| **Armend SALIHU** | ⚙️ DevOps / Automation | Scripts d'automatisation, CI/CD, Déploiement |
+| **Serge Anglesy N'GUESSAN** | 👑 **Lead Dev / Architecte** | Architecture globale, choix technologiques, coordination, Core Django. |
+| **Fedi KHALDI** | 🗄️ **Backend / BDD** | Modèles de données, logique métier, APIs, gestion PostgreSQL. |
+| **Babikir IBRAHIM AL KHALIL** | 🎨 **Frontend / UI / UX** | Design des interfaces, expérience utilisateur, intégration HTML/CSS/JS. |
+| **Armend SALIHU** | ⚙️ **DevOps / Automation** | Scripts d'automatisation, pipelines CI/CD simulés, déploiement. |
+
+---
+
+## 🎯 Contexte du Projet (Scénario)
+
+**Client :** TechConsulting Group (ESN de 200 développeurs).
+
+**Problématique :** Dispersion des outils, coûts de configuration élevés à chaque nouveau projet, manque de standardisation des environnements de développement.
+
+**Solution :** Une plateforme SaaS multi-tenant permettant de :
+1. Centraliser la création de projets (Self-service).
+2. Standardiser les stacks techniques via des templates.
+3. Automatiser les pipelines CI/CD et le monitoring.
+4. Isoler les données par client (Multi-tenancy).
 
 ---
 
 ## 🛠️ Stack Technique
 
-*   **Langage :** Python (Framework Web : Flask/Django) *[À adapter selon votre choix]*
-*   **Base de données :** PostgreSQL
-*   **Frontend :** HTML5, CSS3, JavaScript
-*   **Automatisation :** Scripts Python & PowerShell (Windows 11 Environment)
-*   **Version Control :** Git & GitHub
+*   **Langage :** Python 3.10+
+*   **Framework Web :** Django
+*   **Base de Données :** PostgreSQL (Prod) / SQLite (Dev)
+*   **Frontend :** HTML5, CSS3, JavaScript, Bootstrap 5
+*   **Automatisation :** Scripts Python & Batch/PowerShell
+*   **OS de Développement :** Windows 11
 
 ---
 
 ## ✨ Fonctionnalités Clés
 
 ### 1. Module Projets (Self-Service)
-*   Création de projets à la volée avec isolation complète (Multi-tenant).
-*   Utilisation de templates préconfigurés (Web, Mobile, API).
+*   Création de projets à la demande.
+*   Sélection de templates préconfigurés (Web Django, API Flask, Mobile, etc.).
+*   Isolation complète des environnements par client.
 
-### 2. Automatisation CI/CD
-*   Pipelines automatisés pour le build et le déploiement.
-*   Gestion des environnements (Dev, Staging, Prod).
+### 2. Module CI/CD & Automation
+*   Simulation de pipelines de déploiement.
+*   Scripts d'initialisation de repository Git.
+*   Automatisation des tâches récurrentes.
 
-### 3. Monitoring & Reporting
-*   Tableaux de bord centralisés par projet.
-*   Alertes automatiques et logs système.
+### 3. Module Monitoring
+*   Tableaux de bord (Dashboards) par projet.
+*   Remontée d'alertes et logs centralisés.
+*   Vue globale administrateur.
 
 ### 4. Administration & Sécurité
-*   Gestion des droits utilisateurs et conformité.
-*   Audit trails et sécurité des accès.
+*   Gestion des utilisateurs et des rôles (RBAC).
+*   Audit trails (traçabilité des actions).
+*   Conformité RGPD.
 
 ---
 
-## ⚙️ Installation & Configuration (Windows 11)
+## 💻 Installation & Démarrage (Windows 11)
 
-Suivez ces étapes pour lancer le projet localement sur votre machine Windows.
+Suivez ces instructions pour lancer le projet localement.
 
 ### Prérequis
-*   Python 3.x installé et ajouté au PATH.
-*   PostgreSQL installé et service lancé.
+*   Python installé (vérifiez avec `python --version`).
 *   Git installé.
 
 ### 1. Cloner le projet
