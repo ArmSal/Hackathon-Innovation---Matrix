@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="{{ url_for('core.dashboard') }}" class="text-decoration-none">
+        <i class="bi bi-arrow-left"></i> Retour au Tableau de Bord
+    </a>
+</div>
+
+<div class="row">
+    <!-- Left Column: Info & Actions -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-white fw-bold py-3">
+                Aperçu du Projet
+            </div>
+            <div class="card-body">
+                <h2 class="mb-3">{{ project.name }}</h2>
+                
+                <div class="mb-3">
+                    <label class="small text-muted fw-bold">CLIENT</label>
+                    <div class="fs-5">{{ project.client_name }}</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="small text-muted fw-bold">PILE TECHNOLOGIQUE</label>
+                    <div><span class="badge bg-dark">{{ project.stack }}</span></div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="small text-muted fw-bold">STATUT ACTUEL</label>
+                    <div>
+                        <span id="statusBadge" class="badge fs-6 bg-{{ 'success' if project.status == 'Running' else 'danger' if project.status == 'Error' else 'secondary' }}">
+                            {{ 'En cours' if project.status == 'Running' else 'Erreur' if project.status == 'Error' else 'Arrêté' }}
+                        </span>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <div class="d-grid gap-2">
+                    <button id="deployBtn" onclick="triggerDeploy({{ project.id }})" class="btn btn-primary py-2 fw-bold shadow-sm">
+                        🚀 Déclencher Déploiement
+                    </button>
+                    <button class="btn btn-outline-secondary">
+                        <i class="bi bi-file-earmark-text"></i> Voir Config
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Right Column: Console & History -->
+    <div class="col-md-8">
+        <!-- Live Console -->
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-terminal-fill me-2"></i> Sortie de Compilation En Direct</span>
+                <span class="badge bg-secondary">runner-01</span>
+            </div>
+            <div class="card-body bg-dark p-0">
+                <pre id="consoleLogs" class="console-logs m-0">En attente du déclenchement du travail...</pre>
+            </div>
+        </div>
+
+        <!-- History Table -->
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white fw-bold py-3">
+                Historique des Déploiements
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0 align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Statut</th>
+                            <th>Date/Heure</th>
+                            <th>Déclenché par</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for d in deployments %}
+                        <tr>
+                            <td>#{{ d.id }}</td>
+                            <td>
+                                {% if d.status == 'Success' %}
+                                <span class="text-success"><i class="bi bi-check-circle-fill"></i> Succès</span>
+                                {% else %}
+                                <span class="text-danger"><i class="bi bi-x-circle-fill"></i> Échec</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ d.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td><small class="text-muted">{{ d.triggered_by }}</small></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

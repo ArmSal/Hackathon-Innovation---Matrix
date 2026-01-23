@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centre DevOps - Project DevOps</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="bi bi-hdd-network"></i> Centre DevOps
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <span class="nav-link">👤 {{ current_user.username }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('core.logout') }}">Déconnexion</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('core.login') }}">Se connecter</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="container mb-3">
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 text-muted mt-5">
+        <small>&copy; 2026 Hackathon Innovation - Team Matrix</small>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Dynamic Script for Deploy Button -->
+    <script>
+        function triggerDeploy(projectId) {
+            const btn = document.getElementById('deployBtn');
+            const logBox = document.getElementById('consoleLogs');
+            const badge = document.getElementById('statusBadge');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Pipeline En cours...';
+            logBox.innerHTML = '> Connexion au runner Jenkins...\n> Attente de l\'agent...';
+            logBox.className = 'console-logs';
+
+            fetch(`/api/deploy/${projectId}`, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                logBox.innerHTML = data.logs;
+                btn.disabled = false;
+                btn.innerHTML = '🚀 Déclencher Déploiement';
+                
+                if(data.status === 'Success') {
+                    badge.className = 'badge bg-success fs-6';
+                    badge.innerText = 'En cours';
+                    logBox.style.border = "2px solid #198754";
+                } else {
+                    badge.className = 'badge bg-danger fs-6';
+                    badge.innerText = 'Erreur';
+                    logBox.style.border = "2px solid #dc3545";
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                logBox.innerHTML = "[ERREUR] Impossible de contacter l'API.";
+                btn.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>
