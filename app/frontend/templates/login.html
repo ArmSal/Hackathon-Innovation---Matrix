@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card shadow-lg border-0">
+            <div class="card-body p-5">
+                <h2 class="text-center mb-4 fw-bold">🔐 Se connecter</h2>
+                
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="username" class="form-label fw-bold">Nom d'utilisateur</label>
+                        <input type="text" class="form-control form-control-lg" id="username" name="username" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="password" class="form-label fw-bold">Mot de passe</label>
+                        <input type="password" class="form-control form-control-lg" id="password" name="password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold">Se connecter</button>
+                </form>
+                
+                <hr class="my-4">
+                
+                <p class="text-center text-muted mb-0">
+                    <a href="{{ url_for('core.register') }}" class="text-primary fw-bold">Créer un compte</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
